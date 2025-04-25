@@ -2,7 +2,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const BlogList = ({ title, blogs }) => {
 
-    console.log('Blogs data:', blogs);
+    console.log("Blogs data:", blogs);
 
     return ( 
         <div className="blog-list">

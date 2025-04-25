@@ -1,13 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Create = () => {
-    const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
-    const [author, setAuthor] = useState("barake");
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
+    const [author, setAuthor] = useState('barake');
+    const [isPending, setIsPending] =useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const blog = { title, body, author };
+
+        setIsPending(true);
+
+        fetch('http://localhost:8000/blogs', {
+            method: 'POST',
+            headers: { "content-Type": "application/json" },
+            body: JSON.stringify(blog)
+        }).then(() => {
+            console.log("blog added");
+            setIsPending(false);
+        })
     }
 
     return ( 
@@ -32,10 +44,11 @@ const Create = () => {
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
                 >
-                    <option value="barake">Barake</option>
-                    <option value="shawn">Shawn</option>
+                    <option value='barake'>Barake</option>
+                    <option value='shawn'>Shawn</option>
                 </select>
-                <button>Add Blog</button>
+                { !isPending && <button>Add Blog</button> }
+                { isPending && <button disabled>Adding Blog</button> }
             </form>
         </div>
      );
