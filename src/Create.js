@@ -36,7 +36,7 @@ const Create = () => {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
-                <label>Blog title:</label>
+                <label>Blog body:</label>
                 <textarea
                     required
                     value={body}
